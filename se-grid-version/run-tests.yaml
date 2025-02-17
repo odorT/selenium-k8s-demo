@@ -12,7 +12,7 @@ spec:
     spec:
       restartPolicy: Never
       containers:
-        - image: odort/selenium-k8s-demo:v0.7
+        - image: odort/selenium-k8s-demo:v0.8
           imagePullPolicy: IfNotPresent
           name: testcase
           # command: [ "/bin/bash", "-c", "--" ]
