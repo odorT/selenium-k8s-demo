@@ -16,5 +16,5 @@ This container image installs necessary libraries and includes test cases. Note 
 
 To build the container image, run:
 ```shell
-VERSION=v0.7 && docker build -t odort/selenium-k8s-demo:$VERSION . && docker push odort/selenium-k8s-demo:$VERSION
+VERSION=v0.8 && docker build -t odort/selenium-k8s-demo:$VERSION . && docker push odort/selenium-k8s-demo:$VERSION
 ```
