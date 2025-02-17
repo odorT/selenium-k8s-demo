@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: firefox-runner-node
+  namespace: se-manual
+  labels:
+    app: firefox-runner-node
+spec:
+  selector:
+    app: firefox-runner-node
+  ports:
+  - name: se-node
+    port: 4444
+    targetPort: 4444
