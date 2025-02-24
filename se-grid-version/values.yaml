@@ -1,0 +1,9 @@
+chromeNode:
+  enabled: false
+
+edgeNode:
+  enabled: false
+
+firefoxNode:
+  enabled: true
+  replicas: 3

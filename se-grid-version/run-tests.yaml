@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: run-tests
+spec:
+  template:
+    metadata:
+      labels:
+        app: useinsider-test
+      namespace: default
+      name: useinsider-test
+    spec:
+      restartPolicy: Never
+      containers:
+        - image: odort/selenium-k8s-demo:v0.8
+          imagePullPolicy: IfNotPresent
+          name: testcase
+          # command: [ "/bin/bash", "-c", "--" ]
+          # args: [ "while true; do sleep 30; done;" ]
+          command: [ "/bin/bash", "-c", "--" ]
+          args:
+            - "python useinsider_test.py"
+          env:
+            - name: SE_HUB_URL
+              value: http://selenium-grid-selenium-hub.se-grid:4444
+          resources:
+            limits:
+              memory: 1Gi
+              cpu: '1'

@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: firefox-runner-node
+  namespace: se-manual
+  labels:
+    app: firefox-runner-node
+spec:
+  selector:
+    matchLabels:
+      app: firefox-runner-node
+  template:
+    metadata:
+      labels:
+        app: firefox-runner-node
+    spec:
+      containers:
+      - name: firefox-runner-node
+        image: odort/selenium-k8s-demo:firefox-runner-node-v0.2
+        resources:
+          limits:
+            memory: 2Gi
+            cpu: '0.5'
+        ports:
+        - containerPort: 4444
+          protocol: TCP
+        startupProbe:
+          httpGet:
+            scheme: HTTP
+            path: /readyz
+            port: 4444
+          failureThreshold: 10
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+        readinessProbe:
+          httpGet:
+            scheme: HTTP
+            path: /readyz
+            port: 4444
+          failureThreshold: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+        livenessProbe:
+          exec:
+            command: ["bash", "-c", "/opt/bin/distributorProbe.sh Liveness "]
+          failureThreshold: 30
+          periodSeconds: 60
+          successThreshold: 1
+          timeoutSeconds: 60
